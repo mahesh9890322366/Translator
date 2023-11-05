@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Translator App</title>
+
+	<style type="text/css">
+		.textbox
+		{
+			position: fixed;
+			top: 0px;
+			left: 0px;
+			height: 100vh;
+			width: 100%;
+			background-image: linear-gradient(100deg, #575656, #062e3f);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+		}
+
+       .textbox div
+       {
+       	height: 500px;
+       	width: 300px;
+       	background-image: linear-gradient(100deg, #d4f1ff, #ffffff);;
+       	padding: 30px;
+       	border-radius: 5rem;
+
+
+       	
+
+       }
+
+       .textbox button
+       {
+       	cursor: pointer;
+       	color: white;
+       	background-color: black;
+       	height: 40px;
+       	width: 95px;
+       	text-align: justify-all;
+       	border-radius: 0.45rem;
+       	font-family: 'Work Sans', sans-serif;
+       	
+
+       }
+        button
+       {
+       	transition:  0.2s;
+       }
+
+
+	</style>
+</head>
+<body>
+	<div class="textbox">
+		 <div align="center">
+		 	
+		 	<form action="">
+		 		<label for=""><h1>Enter Message</h1></label>
+		 		<textarea name="text" id="usertext" cols="40" rows="20" onchange="fetchdata()">
+		 			
+		 		</textarea>
+		 		<button type="button" >SPEAK</button>
+
+		 		<button type="button" onclick="uppercase()">UPPERCASE</button>
+		 		<button type="button" onclick="lowercase()">lowercase</button>
+		 	</form>
+		 	<h3>Text contains <span id="words" ></span> words and <span id="character"></span> characters..</h3>
+		 </div>
+	</div>
+
+  <p><span id="datetime"></span></p>
+
+<script>
+
+	let usertext = document.getElementById("usertext");
+	let word = document.getElementById("words");
+
+	word.innerHTML = '0'
+	let character = document.getElementById("character");
+
+	character.innerHTML = '0'
+     
+     function fetchdata()
+     {
+     	let arr = usertext.value.split('').length;
+     	word.innerHTML = arr;
+
+     	let strlength = usertext.value.length;
+     	character.innerHTML = strlength;
+     }
+
+     function uppercase()
+     {
+     	usertext.value = usertext.value.toUpperCase();
+
+     }
+     function lowercase()
+     {
+     	usertext.value = usertext.value.toLowerCase();
+     	
+     }
+
+     
+      // for visually impaired people(speak code)
+
+     let button = document.querySelector("button");
+     let text = document.querySelector("textarea");
+     button.addEventListener("click",()=>{
+     	let utterance = new 
+     	SpeechSynthesisUtterance(usertext.value);
+     	speechSynthesis.speak(utterance);
+     });
+
+     //date & time
+     const dt = new Date();
+     document.getElementById("datetime").innerHTML = dt.toLocaleString();
+
+
+
+
+	
+
+</script>
+</body>
+</html>
